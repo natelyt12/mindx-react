@@ -1,0 +1,1 @@
+My MindX React learning materials. Practice exercises are in the /h folder.
