@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* Sử dụng AI để viết CSS */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f1f3f5;
+  font-family: "Inter", sans-serif;
+  color: #1e293b;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  padding: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Header & Search */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search_bar {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px;
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  align-items: center;
+  border-radius: 8px;
+  width: 320px;
+}
+
+.search_bar_input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1e293b;
+}
+
+.search_bar_input::placeholder {
+  color: #94a3b8;
+}
+
+.new_item {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  background-color: #0044ff;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.new_item:hover {
+  background-color: #0033cc;
+}
+
+/* Category Columns Layout */
+.content {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.cat {
+  background-color: #e9ecef;
+  flex: 1;
+  min-width: 270px;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Category Header */
+.cat_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cat_header_left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group_title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.badge {
+  background-color: #dee2e6;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.cat_header_actions {
+  display: flex;
+  gap: 4px;
+}
+
+.icon_btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background-color: #dee2e6;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.icon_btn:hover {
+  background-color: #ced4da;
+  color: #212529;
+}
+
+/* Cards Body */
+.cat_body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Task Item Card */
+.task_container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 14px 14px 10px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.2s ease;
+}
+
+.task_container:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.task_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.task_title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+.edit_btn {
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.edit_btn:hover {
+  color: #0f172a;
+}
+
+.task_body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.task_desc {
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+/* User Assign Badge */
+.task_assign {
+  background-color: #0038ff;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Card Footer */
+.task_footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 8px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.attach_wrapper,
+.datetime_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.attach_index {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
