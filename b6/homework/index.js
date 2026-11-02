@@ -2,17 +2,18 @@ import { MINDX_API_KEY } from "./env.js";
 
 const domain = "https://mindx-mockup-server.vercel.app";
 
-// 1. CÁC ELEMENT LẤY TỪ HTML (Đã có sẵn trong index.html)
 const btnAddUser = document.getElementById("btn-add-user");
 const btnAddTask = document.getElementById("btn-add-task");
 const btnDeleteFirstTask = document.getElementById("btn-delete-first-task");
+const btnUpdateFirstUser = document.getElementById("btn-update-first-user");
+const btnUpdateFirstTask = document.getElementById("btn-update-first-task");
 const usersInfo = document.getElementById("users-info");
 const statusInfo = document.getElementById("status-info");
 const flagsInfo = document.getElementById("flags-info");
 const tasksHeading = document.getElementById("tasks-heading");
 const tasksList = document.getElementById("tasks-list");
 
-// 2. HÀM GỌI API LẤY DỮ LIỆU
+// GỌI API LẤY DỮ LIỆU
 async function getTodo() {
   try {
     const response = await fetch(
@@ -27,7 +28,7 @@ async function getTodo() {
   }
 }
 
-// 3. HÀM LỌC TASKS THEO CÁC ĐIỀU KIỆN
+// LỌC TASKS
 function filterTasks(tasks, { flagId, statusId, assignedTo } = {}) {
   return tasks.filter((task) => {
     const matchFlag = flagId ? task.flagId === Number(flagId) : true;
@@ -39,7 +40,7 @@ function filterTasks(tasks, { flagId, statusId, assignedTo } = {}) {
   });
 }
 
-// 4. HÀM HIỂN THỊ DANH SÁCH TASKS
+// HIỂN THỊ TASKS
 function renderTasks(tasks, users = [], taskStatus = [], flags = []) {
   tasksHeading.innerText = `Danh sách công việc (${tasks.length} tasks):`;
 
@@ -63,7 +64,7 @@ function renderTasks(tasks, users = [], taskStatus = [], flags = []) {
     .join("");
 }
 
-// 5. HÀM THÊM USER MẪU
+// THÊM USER MẪU
 async function addUser() {
   try {
     const raw_data = await getTodo();
@@ -95,7 +96,7 @@ async function addUser() {
   }
 }
 
-// 6. HÀM THÊM TASK MẪU
+// THÊM TASK MẪU
 async function addTask() {
   try {
     const raw_data = await getTodo();
@@ -132,7 +133,7 @@ async function addTask() {
   }
 }
 
-// 7. HÀM XÓA TASK ĐẦU TIÊN
+// XÓA TASK ĐẦU TIÊN
 async function deleteFirstTask() {
   try {
     const raw_data = await getTodo();
@@ -141,7 +142,7 @@ async function deleteFirstTask() {
 
     // Kiểm tra nếu danh sách rỗng thì không xóa
     if (!short_path.tasks || short_path.tasks.length === 0) {
-      alert("Không còn task nào để xóa!");
+      alert("Không còn task nào để xóa");
       return;
     }
 
@@ -166,12 +167,86 @@ async function deleteFirstTask() {
   }
 }
 
-// 8. GẮN SỰ KIỆN CHO CÁC NÚT BẤM
+// GẮN EVENT
 btnAddUser.addEventListener("click", addUser);
 btnAddTask.addEventListener("click", addTask);
 btnDeleteFirstTask.addEventListener("click", deleteFirstTask);
+btnUpdateFirstUser.addEventListener("click", updateFirstUser);
+btnUpdateFirstTask.addEventListener("click", updateFirstTask);
 
-// 9. HÀM RENDER UI
+// SỬA USER ĐẦU TIÊN
+async function updateFirstUser() {
+  try {
+    const raw_data = await getTodo();
+    if (!raw_data) return;
+    const short_path = raw_data.data.data[0];
+
+    if (!short_path.users || short_path.users.length === 0) {
+      alert("Không có user nào để sửa!");
+      return;
+    }
+
+    const updatedUsers = [...short_path.users];
+    updatedUsers[0] = {
+      ...updatedUsers[0],
+      name: `${updatedUsers[0].name} (Đã sửa)`,
+    };
+
+    const response = await fetch(
+      `${domain}/api/resources/mindx_resource/${short_path._id}?apiKey=${MINDX_API_KEY}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ users: updatedUsers }),
+      },
+    );
+
+    if (response.ok) {
+      console.log("Đã cập nhật user đầu tiên thành công");
+      ui();
+    }
+  } catch (error) {
+    console.error("Lỗi khi sửa user:", error);
+  }
+}
+
+// SỬA TASK ĐẦU TIÊN
+async function updateFirstTask() {
+  try {
+    const raw_data = await getTodo();
+    if (!raw_data) return;
+    const short_path = raw_data.data.data[0];
+
+    if (!short_path.tasks || short_path.tasks.length === 0) {
+      alert("Không có task nào để sửa!");
+      return;
+    }
+
+    const updatedTasks = [...short_path.tasks];
+    updatedTasks[0] = {
+      ...updatedTasks[0],
+      title: `${updatedTasks[0].title} (Đã sửa)`,
+    };
+
+    const response = await fetch(
+      `${domain}/api/resources/mindx_resource/${short_path._id}?apiKey=${MINDX_API_KEY}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tasks: updatedTasks }),
+      },
+    );
+
+    if (response.ok) {
+      console.log("Đã cập nhật task đầu tiên thành công");
+      ui();
+    }
+  } catch (error) {
+    console.error("Lỗi khi sửa task:", error);
+  }
+}
+
+// RENDER UI
 async function ui() {
   const raw_data = await getTodo();
   if (!raw_data) return;
@@ -181,11 +256,13 @@ async function ui() {
 
   const { tasks, users, taskStatus, flags } = short_path;
 
+  const filtered = filterTasks(tasks);
+
   usersInfo.innerText = `Danh sách user: ${users.map((u) => u.name).join(", ")}`;
   statusInfo.innerText = `Danh sách task status: ${taskStatus.map((s) => s.name).join(", ")}`;
   flagsInfo.innerText = `Danh sách flags:\n${flags.map((f) => `Tên: ${f.name}, Màu: ${f.color}`).join("\n")}`;
 
-  renderTasks(tasks, users, taskStatus, flags);
+  renderTasks(filtered, users, taskStatus, flags);
 }
 
 // init

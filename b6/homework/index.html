@@ -1,40 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Fetch</title>
-  </head>
-  <body
-    style="
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Fetch</title>
+</head>
+
+<body style="
       background-color: black;
       color: white;
       font-family: sans-serif;
       padding: 20px;
-    "
-  >
-    <!-- KHUNG ĐIỀU KHIỂN & CÁC NÚT BẤM -->
-    <div style="margin-bottom: 20px">
-      <button id="btn-add-user">Thêm user mẫu</button>
-      <button id="btn-add-task">Thêm task mẫu</button>
-      <button id="btn-delete-first-task">Xóa task đầu tiên</button>
-    </div>
+    ">
+  <!-- KHUNG ĐIỀU KHIỂN & CÁC NÚT BẤM -->
+  <div style="margin-bottom: 20px">
+    <button id="btn-add-user">Thêm user mẫu</button>
+    <button id="btn-add-task">Thêm task mẫu</button>
+    <button id="btn-delete-first-task">Xóa task đầu tiên</button>
+    <button id="btn-update-first-user">Sửa user đầu tiên</button>
+    <button id="btn-update-first-task">Sửa task đầu tiên</button>
+  </div>
 
-    <!-- KHU VỰC THÔNG TIN TỔNG QUAN -->
-    <div class="summary">
-      <p id="users-info">Danh sách user:</p>
-      <p id="status-info">Danh sách task status:</p>
-      <p id="flags-info" style="white-space: pre-line">Danh sách flags:</p>
-    </div>
+  <!-- KHU VỰC THÔNG TIN TỔNG QUAN -->
+  <div class="summary">
+    <p id="users-info">Danh sách user:</p>
+    <p id="status-info">Danh sách task status:</p>
+    <p id="flags-info" style="white-space: pre-line">Danh sách flags:</p>
+  </div>
 
-    <hr style="border-color: #333" />
+  <hr style="border-color: #333" />
 
-    <!-- KHU VỰC DANH SÁCH TASKS -->
-    <div id="tasks-container">
-      <h3 id="tasks-heading">Danh sách công việc:</h3>
-      <ul id="tasks-list"></ul>
-    </div>
+  <!-- KHU VỰC DANH SÁCH TASKS -->
+  <div id="tasks-container">
+    <h3 id="tasks-heading">Danh sách công việc:</h3>
+    <ul id="tasks-list"></ul>
+  </div>
 
-    <script type="module" src="./index.js"></script>
-  </body>
+  <script type="module" src="./index.js"></script>
+</body>
+
 </html>
