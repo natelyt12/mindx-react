@@ -1,0 +1,23 @@
+# Tự động chuẩn hóa line endings thành LF cho tất cả các file text
+* text=auto eol=lf
+
+# Khai báo rõ định dạng cho các file code & tài liệu
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+
+# Khai báo file nhị phân (binary) để Git không can thiệp
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
