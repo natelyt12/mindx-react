@@ -1,0 +1,17 @@
+grid, button, banner, vị trí sắp xếp content (trên dưới, trái phải, giữa), margin, padding
+
+state & prop
+
+ làm việc data (xem lại cách import với data có sẳn)
+
+Nguyễn Văn Hùng (HungNV)
+
+Mindx_MiddleTerm_HungNV_PNL311
+
+ 
+
+Tên dự án sẽ là tên viết tắt (ChungNV)
+
+ 
+
+Trong file index.html sửa thành full name của mình
